@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planner Pro | About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== Reuse Your Existing Styles ===== */
+        :root {
+            --primary-color: #d83f87;
+            --secondary-color: #a52a5e;
+            --accent-color: #ff7aa8;
+            --dark-color: #2c2c2c;
+            --light-color: #fff9f9;
+            --text-color: #333;
+            --text-light: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Header Styles ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 35px 15%;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            position: fixed;
+            top: 1%;
+            left: 3%;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            pointer-events: none;
+        }
+
+        nav ul {
+            position: absolute;
+            top: 20%;
+            right: 30px;
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            position: relative;
+        }
+
+        nav ul li a.active:after,
+        nav ul li a:hover:after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Updated Account Dropdown Styles */
+        .account-menu {
+            position: relative;
+            margin-left: 8px;
+        }
+
+        .menu-trigger {
+            display: flex;
+            position: relative;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 15px;
+            background-color: #f8f8f8;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .menu-trigger:hover {
+            background-color: #e9e9e9;
+        }
+
+        .menu-trigger i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 18px;
+            width: 20px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 180px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .account-menu:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu ul {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown-menu li {
+            margin-left: 15%;
+            padding: 0px 12px;
+            transition: all 0.2s;
+        }
+
+        .fa-calendar-check {
+            margin-left: 15px;
+        }
+
+        .fa-cog {
+            margin-left: -12px;
+        }
+
+        .logout-btn {
+            margin-left: -11px;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: #f9f9f9;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            gap: 12px;
+        }
+
+        .dropdown-menu i {
+            width: 20px;
+            color: var(--primary-color);
+        }
+
+        .logout-btn {
+            padding-top: 12px;
+            color: #e74c3c;
+        }
+
+        .logout-btn i {
+            color: #e74c3c !important;
+        }
+
+
+        /* ===== About Hero Section ===== */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e") center/cover no-repeat;
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+            margin-bottom: 60px;
+        }
+
+        .about-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ===== About Content Section ===== */
+        .about-section {
+            padding: 60px 0;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ===== Team Section ===== */
+        .team-section {
+            padding: 60px 0;
+            background-color: #fef6f9;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .member-info p {
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .member-contact {
+            margin-top: 15px;
+        }
+
+        .member-contact a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: #f8f8f8;
+            border-radius: 50%;
+            color: var(--primary-color);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== Location Section ===== */
+        .location-section {
+            padding: 60px 0;
+        }
+
+        .location-container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .location-info {
+            flex: 1;
+        }
+
+        .location-info h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .location-info p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .contact-details {
+            margin-top: 30px;
+        }
+
+        .contact-details p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .contact-details i {
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .location-map {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Add to your existing CSS smooth animations*/
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .member-image img {
+            transition: transform 0.5s ease;
+        }
+
+        .location-map iframe {
+            transition: filter 0.3s ease;
+        }
+
+        /* Mobile menu styles */
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 250px;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            .hamburger span {
+                transition: all 0.3s ease;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+
+        /* ===== Footer (Same as Homepage) ===== */
+        footer {
+            background: linear-gradient(135deg, #d83f87, #e84c3d);
+            /*background-color: var(--dark-color);*/
+            color: white;
+            padding-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .footer-social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .footer-contact i {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Responsive Adjustments ===== */
+        @media (max-width: 992px) {
+
+            .about-content,
+            .location-container {
+                flex-direction: column;
+            }
+
+            .about-image,
+            .location-map {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .page-transition {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">WeddingPlannerPro</a>
+            <nav>
+                <ul>
+                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="#gallery" class="active">Gallery</a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="contact.html" class="active">Review</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <!-- HTML Structure -->
+                    <li class="account-menu">
+                        <div class="menu-trigger">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="hamburger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu">
+                            <ul>
+                                <li>
+                                    <a href="my-weaddings.html">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-user-edit"></i>
+                                        Edit Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="my-weaddings.html">
+                                        <i class="fas fa-calendar-check"></i>
+                                        My Weddings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-cog"></i>
+                                        Settings
+                                    </a>
+                                    <a href="signup.html" class="logout-btn" onclick="logout()">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-hero-content">
+                <h1>Our Story</h1>
+                <p>Creating unforgettable moments since 2010</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Content Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Who We Are</h2>
+                    <p>WeddingPlannerPro is Kolkata's premier wedding planning agency, founded by award-winning event
+                        designer Priya Sharma in 2010. What began as a passion project has grown into a team of 25
+                        dedicated professionals who have planned over 500 weddings across India.</p>
+                    <p>We specialize in creating personalized, stress-free wedding experiences that reflect each
+                        couple's unique love story. Our team brings together expertise in design, logistics, and
+                        cultural traditions to craft celebrations that are as seamless as they are stunning.</p>
+                    <p>From intimate garden ceremonies to grand ballroom receptions, we handle every detail with
+                        precision and care, allowing you to focus on what truly matters - celebrating your love.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e" alt="Wedding planning team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Leadership Team</h2>
+            <p class="section-subtitle">The passionate professionals behind your perfect day</p>
+
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Priya Sharma">
+                    </div>
+                    <div class="member-info">
+                        <h3>Priya Sharma</h3>
+                        <p>Founder & Creative Director</p>
+                        <div class="member-contact">
+                            <a href="mailto:priya@weddingplannerpro.com">priya@weddingplannerpro.com</a>
+                            <a href="tel:+919876543210">+91 98765 43210</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Kapoor">
+                    </div>
+                    <div class="member-info">
+                        <h3>Rahul Kapoor</h3>
+                        <p>Operations Manager</p>
+                        <div class="member-contact">
+                            <a href="mailto:rahul@weddingplannerpro.com">rahul@weddingplannerpro.com</a>
+                            <a href="tel:+919876543211">+91 98765 43211</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ananya Patel">
+                    </div>
+                    <div class="member-info">
+                        <h3>Ananya Patel</h3>
+                        <p>Senior Event Designer</p>
+                        <div class="member-contact">
+                            <a href="mailto:ananya@weddingplannerpro.com">ananya@weddingplannerpro.com</a>
+                            <a href="tel:+919876543212">+91 98765 43212</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Arjun Mehta">
+                    </div>
+                    <div class="member-info">
+                        <h3>Arjun Mehta</h3>
+                        <p>Vendor Relations</p>
+                        <div class="member-contact">
+                            <a href="mailto:arjun@weddingplannerpro.com">arjun@weddingplannerpro.com</a>
+                            <a href="tel:+919876543213">+91 98765 43213</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Neha Gupta">
+                    </div>
+                    <div class="member-info">
+                        <h3>Neha Gupta</h3>
+                        <p>Client Relations</p>
+                        <div class="member-contact">
+                            <a href="mailto:neha@weddingplannerpro.com">neha@weddingplannerpro.com</a>
+                            <a href="tel:+919876543214">+91 98765 43214</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Vikram Singh">
+                    </div>
+                    <div class="member-info">
+                        <h3>Vikram Singh</h3>
+                        <p>Logistics Manager</p>
+                        <div class="member-contact">
+                            <a href="mailto:vikram@weddingplannerpro.com">vikram@weddingplannerpro.com</a>
+                            <a href="tel:+919876543215">+91 98765 43215</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 7 -->
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Meera Joshi">
+                    </div>
+                    <div class="member-info">
+                        <h3>Meera Joshi</h3>
+                        <p>Cultural Specialist</p>
+                        <div class="member-contact">
+                            <a href="mailto:meera@weddingplannerpro.com">meera@weddingplannerpro.com</a>
+                            <a href="tel:+919876543216">+91 98765 43216</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <div class="container">
+            <div class="location-container">
+                <div class="location-info">
+                    <h2>Our Kolkata Office</h2>
+                    <p>Visit our beautifully designed studio in the heart of Kolkata, where we collaborate with couples
+                        to bring their wedding visions to life.</p>
+                    <p>Our central location makes it easy for you to meet with our team and view samples of decor,
+                        floral arrangements, and more.</p>
+
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> 42 Park Street, 5th Floor, Kolkata - 700016</p>
+                        <p><i class="fas fa-phone"></i> +91 33 1234 5678</p>
+                        <p><i class="fas fa-envelope"></i> kolkata@weddingplannerpro.com</p>
+                        <p><i class="fas fa-clock"></i> Mon-Sat: 10AM - 7PM (by appointment)</p>
+                    </div>
+                </div>
+                <div class="location-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.395427724412!2d88.3507383153404!3d22.56178598518735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02771346ae015d%3A0xb540e4bce39763!2sPark%20Street%2C%20Kolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1629876543210!5m2!1sen!2sin"
+                        allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const data = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                weddingDate: document.getElementById("weddingDate").value,
+                service: document.getElementById("service").value,
+            };
+
+            try {
+                const res = await fetch("http://localhost:5000/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                alert(result.message || "Form submitted!");
+            } catch (err) {
+                console.error("Error submitting form:", err);
+                alert("There was an error. Please try again later.");
+            }
+        });
+    </script>
+
+    <script src="about.js"></script>
+    <script src="footer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planner Pro | Our Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== Reuse Your Existing Styles ===== */
+        :root {
+            --primary-color: #d83f87;
+            --secondary-color: #a52a5e;
+            --accent-color: #ff7aa8;
+            --dark-color: #2c2c2c;
+            --light-color: #fff9f9;
+            --text-color: #333;
+            --text-light: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d83f87;
+            text-decoration: none;
+            pointer-events: none;
+        }
+
+        nav ul {
+            position: absolute;
+            top: 20%;
+            right: 30px;
+            display: flex;
+            list-style: none;
+            align-items: center;
+            text-decoration: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            position: relative;
+        }
+
+        nav ul li a.active:after,
+        nav ul li a:hover:after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Updated Account Dropdown Styles */
+        .account-menu {
+            position: relative;
+            margin-left: 8px;
+        }
+
+        .menu-trigger {
+            display: flex;
+            position: relative;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 15px;
+            background-color: #f8f8f8;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .menu-trigger:hover {
+            background-color: #e9e9e9;
+        }
+
+        .menu-trigger i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 18px;
+            width: 20px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 180px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .account-menu:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu ul {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown-menu li {
+            margin-left: 15%;
+            padding: 0px 12px;
+            transition: all 0.2s;
+        }
+
+        .fa-calendar-check {
+            margin-left: 15px;
+        }
+
+        .fa-cog {
+            margin-left: -12px;
+        }
+
+        .logout-btn {
+            margin-left: -11px;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: #f9f9f9;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            gap: 12px;
+        }
+
+        .dropdown-menu i {
+            width: 20px;
+            color: var(--primary-color);
+        }
+
+        .logout-btn {
+            padding-top: 12px;
+            color: #e74c3c;
+        }
+
+        .logout-btn i {
+            color: #e74c3c !important;
+        }
+
+        /* ===== Progress Bar ===== */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+        }
+
+        /* ===== Services Hero Section ===== */
+        .services-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("https://images.unsplash.com/photo-1511285560929-80b456fea0bc") center/cover no-repeat;
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+            margin-bottom: 60px;
+        }
+
+        .services-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .services-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ===== Services Categories ===== */
+        .services-categories {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+        }
+
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background: #f8f8f8;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .services-content {
+            display: none;
+        }
+
+        .services-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Service Details ===== */
+        .service-detail {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        .service-detail.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .service-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .service-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-info ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .service-info li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .service-info li:before {
+            content: "✓";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .service-cta {
+            margin-top: 30px;
+        }
+
+        .btn-service {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        .btn-service:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-service.outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-service.outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* ===== Vendor Showcase ===== */
+        .vendor-showcase {
+            padding: 60px 0;
+            background-color: #fef6f9;
+        }
+
+        .vendor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .vendor-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .vendor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .vendor-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .vendor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .vendor-card:hover .vendor-image img {
+            transform: scale(1.1);
+        }
+
+        .vendor-info {
+            padding: 20px;
+        }
+
+        .vendor-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .vendor-info p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .vendor-rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .vendor-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .vendor-link:hover {
+            background: var(--secondary-color);
+        }
+
+        /* ===== Testimonials ===== */
+        .testimonials {
+            padding: 60px 0;
+            background: white;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: #fef6f9;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial:before {
+            content: " ";
+            font-family: Georgia;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h5 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ===== CTA Section ===== */
+        .services-cta {
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url("https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8") center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-cta.primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-cta.primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .btn-cta.secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-cta.secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ===== Footer (Same as Homepage) ===== */
+        footer {
+            background: linear-gradient(135deg, #d83f87, #e84c3d);
+            /*background-color: var(--dark-color);*/
+            color: white;
+            padding-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .footer-social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .footer-contact i {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Responsive Adjustments ===== */
+        @media (max-width: 992px) {
+            .service-detail {
+                flex-direction: column;
+            }
+
+            .service-detail.reverse {
+                flex-direction: column;
+            }
+
+            .service-image,
+            .service-info {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+
+            .btn-service {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+                text-align: center;
+            }
+        }
+
+        .page-transition {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">WeddingPlannerPro</a>
+            <nav>
+                <ul>
+                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="#gallery" class="active">Gallery</a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="contact.html" class="active">Review</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <!-- HTML Structure -->
+                    <li class="account-menu">
+                        <div class="menu-trigger">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="hamburger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu">
+                            <ul>
+                                <li>
+                                    <a href="my-weaddings.html">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-user-edit"></i>
+                                        Edit Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="my-weaddings.html">
+                                        <i class="fas fa-calendar-check"></i>
+                                        My Weddings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-cog"></i>
+                                        Settings
+                                    </a>
+                                    <a href="signup.html" class="logout-btn" onclick="logout()">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Services Hero Section -->
+    <section class="services-hero">
+        <div class="container">
+            <div class="services-hero-content">
+                <h1>Our Comprehensive Services</h1>
+                <p>Every detail perfected for your perfect day</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Categories -->
+    <section class="services-categories">
+        <div class="container">
+            <h2 class="section-title">Wedding Services</h2>
+            <p class="section-subtitle">We handle every aspect of your wedding planning</p>
+
+            <div class="services-tabs">
+                <button class="tab-btn active" data-tab="full-planning">Full Planning</button>
+                <button class="tab-btn" data-tab="venue-selection">Venue Selection</button>
+                <button class="tab-btn" data-tab="vendor-coordination">Vendor Coordination</button>
+                <button class="tab-btn" data-tab="design-decor">Design & Decor</button>
+                <button class="tab-btn" data-tab="day-coordination">Day-Of Coordination</button>
+            </div>
+
+            <!-- Full Planning Content -->
+            <div id="full-planning" class="services-content active">
+                <div class="service-detail">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc"
+                            alt="Full Wedding Planning">
+                    </div>
+                    <div class="service-info">
+                        <h3>Complete Wedding Planning</h3>
+                        <p>Our full-service planning package is perfect for couples who want a completely stress-free
+                            experience. We'll handle every detail from start to finish, ensuring your wedding reflects
+                            your unique style and personality.</p>
+                        <ul>
+                            <li>Unlimited consultations and planning sessions</li>
+                            <li>Customized timeline and checklist</li>
+                            <li>Venue selection and contract negotiation</li>
+                            <li>Complete vendor management</li>
+                            <li>Budget creation and management</li>
+                            <li>Design concept development</li>
+                            <li>Full rehearsal coordination</li>
+                            <li>Day-of coordination with assistant</li>
+                        </ul>
+                        <div class="service-cta">
+                            <a href="pricing.html#full-planning" class="btn-service">View Pricing</a>
+                            <a href="contact.html" class="btn-service outline">Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Venue Selection Content -->
+            <div id="venue-selection" class="services-content">
+                <div class="service-detail reverse">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8" alt="Venue Selection">
+                    </div>
+                    <div class="service-info">
+                        <h3>Venue Selection Service</h3>
+                        <p>Finding the perfect venue sets the tone for your entire wedding. Our venue specialists will
+                            present you with curated options that match your vision, budget, and guest count.</p>
+                        <ul>
+                            <li>Personalized venue recommendations</li>
+                            <li>Site visits with our planners</li>
+                            <li>Contract review and negotiation</li>
+                            <li>Layout and seating planning</li>
+                            <li>Logistics coordination (parking, power, etc.)</li>
+                            <li>Permit acquisition assistance</li>
+                            <li>Rain contingency planning</li>
+                            <li>Vendor access coordination</li>
+                        </ul>
+                        <div class="service-cta">
+                            <a href="gallery.html#venues" class="btn-service">View Venues</a>
+                            <a href="contact.html" class="btn-service outline">Schedule Tour</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor Coordination Content -->
+            <div id="vendor-coordination" class="services-content">
+                <div class="service-detail">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e"
+                            alt="Vendor Coordination">
+                    </div>
+                    <div class="service-info">
+                        <h3>Vendor Coordination</h3>
+                        <p>We've cultivated relationships with the best vendors in the industry. Let us connect you with
+                            professionals who will bring your vision to life while staying within your budget.</p>
+                        <ul>
+                            <li>Photographers & Videographers</li>
+                            <li>Caterers & Bar Services</li>
+                            <li>Florists & Decor Specialists</li>
+                            <li>Entertainment (Bands/DJs)</li>
+                            <li>Transportation Services</li>
+                            <li>Beauty Professionals</li>
+                            <li>Invitation Designers</li>
+                            <li>Rental Companies</li>
+                        </ul>
+                        <div class="service-cta">
+                            <a href="#vendor-showcase" class="btn-service">Our Preferred Vendors</a>
+                            <a href="contact.html" class="btn-service outline">Request Vendor List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design & Decor Content -->
+            <div id="design-decor" class="services-content">
+                <div class="service-detail reverse">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6" alt="Wedding Design">
+                    </div>
+                    <div class="service-info">
+                        <h3>Design & Decor Services</h3>
+                        <p>Our design team will create a cohesive aesthetic that tells your love story through
+                            beautiful, personalized details.</p>
+                        <ul>
+                            <li>Custom mood boards and design concepts</li>
+                            <li>Color palette development</li>
+                            <li>Floral design consultation</li>
+                            <li>Lighting design</li>
+                            <li>Tablescape design</li>
+                            <li>Ceremony backdrop design</li>
+                            <li>Signage and stationery coordination</li>
+                            <li>Rental selection and coordination</li>
+                        </ul>
+                        <div class="service-cta">
+                            <a href="gallery.html#decor" class="btn-service">View Decor Gallery</a>
+                            <a href="contact.html" class="btn-service outline">Start Design Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day-Of Coordination Content -->
+            <div id="day-coordination" class="services-content">
+                <div class="service-detail">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00"
+                            alt="Day-Of Coordination">
+                    </div>
+                    <div class="service-info">
+                        <h3>Day-Of Coordination</h3>
+                        <p>For couples who have planned their wedding but need professional execution on the big day,
+                            our coordination service ensures everything runs smoothly.</p>
+                        <ul>
+                            <li>Final vendor confirmations</li>
+                            <li>Timeline creation and distribution</li>
+                            <li>Wedding rehearsal coordination</li>
+                            <li>Full-day coordination (12 hours)</li>
+                            <li>Vendor management on-site</li>
+                            <li>Emergency kit available</li>
+                            <li>Two professional coordinators</li>
+                            <li>Post-event wrap-up</li>
+                        </ul>
+                        <div class="service-cta">
+                            <a href="pricing.html#coordination" class="btn-service">View Packages</a>
+                            <a href="contact.html" class="btn-service outline">Check Availability</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vendor Showcase -->
+    <section id="vendor-showcase" class="vendor-showcase">
+        <div class="container">
+            <h2 class="section-title">Our Preferred Vendors</h2>
+            <p class="section-subtitle">Trusted professionals we work with regularly</p>
+
+            <div class="vendor-grid">
+                <!-- Vendor 1 -->
+                <div class="vendor-card">
+                    <div class="vendor-image">
+                        <img src="https://images.unsplash.com/photo-1551218371-fc60b50d4555" alt="Floral Vendor">
+                    </div>
+                    <div class="vendor-info">
+                        <h4>Blossom & Bloom</h4>
+                        <p>Premium floral design studio specializing in luxury wedding arrangements</p>
+                        <div class="vendor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <a href="https://blossomandbloom.com" target="_blank" class="vendor-link">View Portfolio</a>
+                    </div>
+                </div>
+
+                <!-- Vendor 2 -->
+                <div class="vendor-card">
+                    <div class="vendor-image">
+                        <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71"
+                            alt="Photography Vendor">
+                    </div>
+                    <div class="vendor-info">
+                        <h4>Timeless Moments</h4>
+                        <p>Award-winning wedding photography with candid and traditional styles</p>
+                        <div class="vendor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <a href="https://timelessmoments.com" target="_blank" class="vendor-link">View Gallery</a>
+                    </div>
+                </div>
+
+                <!-- Vendor 3 -->
+                <div class="vendor-card">
+                    <div class="vendor-image">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033" alt="Catering Vendor">
+                    </div>
+                    <div class="vendor-info">
+                        <h4>Gourmet Celebrations</h4>
+                        <p>Five-star catering service with customizable menus for all dietary needs</p>
+                        <div class="vendor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <a href="https://gourmetcelebrations.com" target="_blank" class="vendor-link">View Menus</a>
+                    </div>
+                </div>
+
+                <!-- Vendor 4 -->
+                <div class="vendor-card">
+                    <div class="vendor-image">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a5d4"
+                            alt="Entertainment Vendor">
+                    </div>
+                    <div class="vendor-info">
+                        <h4>Melody Makers</h4>
+                        <p>Live bands and DJs specializing in wedding entertainment</p>
+                        <div class="vendor-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <a href="https://melodymakers.com" target="_blank" class="vendor-link">Listen Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Couples Say</h2>
+            <p class="section-subtitle">Hear from our happy clients</p>
+
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "WeddingPlannerPro made our dream wedding a reality! Their attention to detail and vendor
+                        connections were invaluable. Every moment was perfect thanks to their team."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Priya & Rohan">
+                        </div>
+                        <div class="author-info">
+                            <h5>Priya & Rohan</h5>
+                            <p>January 2023 Wedding</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="services-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Planning?</h2>
+                <p>Schedule a consultation with one of our wedding specialists to discuss your vision and how we can
+                    bring it to life.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-cta primary">Book Consultation</a>
+                    <a href="tel:+913312345678" class="btn-cta secondary">Call Us Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="footer.js"></script>
+</body>
+
+</html>

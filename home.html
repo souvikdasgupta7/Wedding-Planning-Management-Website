@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Planner Pro | Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- <link rel="stylesheet" href="home.css" /> -->
+  <link rel="stylesheet" href="Styles.css" />
+</head>
+
+<body>
+  <style>
+    /* ===== Global Styles ===== */
+    :root {
+      --primary-color: #d83f87;
+      --secondary-color: #a52a5e;
+      --accent-color: #ff7aa8;
+      --dark-color: #2c2c2c;
+      --light-color: #fff9f9;
+      --text-color: #333;
+      --text-light: #777;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: var(--light-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== Header Styles ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 35px 15%;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      position: fixed;
+      top: 1%;
+      left: 3%;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      pointer-events: none;
+    }
+
+    nav ul {
+      position: absolute;
+      top: 20%;
+      right: 30px;
+      display: flex;
+      list-style: none;
+      align-items: center;
+      text-decoration: none;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      position: relative;
+    }
+
+    nav ul li a.active:after,
+    nav ul li a:hover:after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Authentication Buttons */
+    .auth-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      background-color: #d83f87;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .auth-btn:hover {
+      background-color: #a52a5e;
+      transform: translateY(-2px);
+    }
+
+    .auth-btn i {
+      transition: transform 0.3s;
+    }
+
+    .auth-btn:hover i {
+      transform: scale(1.1);
+    }
+
+    /* Updated Account Dropdown Styles */
+    .account-menu {
+      position: relative;
+      margin-left: 8px;
+    }
+
+    .menu-trigger {
+      display: flex;
+      position: relative;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 8px 15px;
+      background-color: #f8f8f8;
+      border-radius: 30px;
+      transition: all 0.3s;
+    }
+
+    .menu-trigger:hover {
+      background-color: #e9e9e9;
+    }
+
+    .menu-trigger i {
+      font-size: 24px;
+      color: var(--primary-color);
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 18px;
+      width: 20px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-color);
+      transition: all 0.3s;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 180px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 1000;
+      padding: 10px 0;
+    }
+
+    .account-menu:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu ul {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .dropdown-menu li {
+      margin-left: 15%;
+      padding: 0px 12px;
+      transition: all 0.2s;
+    }
+
+    .fa-calendar-check {
+      margin-left: 15px;
+    }
+
+    .fa-cog {
+      margin-left: -12px;
+    }
+
+    .logout-btn {
+      margin-left: -11px;
+    }
+
+    .dropdown-menu li:hover {
+      background-color: #f9f9f9;
+    }
+
+    .dropdown-menu a {
+      display: flex;
+      text-decoration: none;
+      color: var(--text-color);
+      font-size: 0.95rem;
+      gap: 12px;
+    }
+
+    .dropdown-menu i {
+      width: 20px;
+      color: var(--primary-color);
+    }
+
+    .logout-btn {
+      padding-top: 12px;
+      color: #e74c3c;
+    }
+
+    .logout-btn i {
+      color: #e74c3c !important;
+    }
+
+    /* ===== Progress Bar ===== */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--primary-color);
+      width: 0%;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("https://images.unsplash.com/photo-1519225421980-715cb0215aed") center/cover no-repeat;
+      width: 100vw;
+      height: 50vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding-top: 80px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* Search Section Styles - Matches Your Theme */
+    .venue-search {
+      background: linear-gradient(135deg, rgba(216, 63, 135, 0.08) 0%, rgba(37, 150, 190, 0.08) 100%);
+      padding: 60px 20px;
+      margin-top: 80px;
+      /* Adjust based on header height */
+    }
+
+    .search-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .search-title {
+      color: #d83f87;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .search-subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .search-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .search-select {
+      appearance: none;
+      padding: 10px 30px;
+      border-radius: 20px;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d83f87'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 15px;
+    }
+
+    .form-input {
+      padding: 10px 30px;
+      border-radius: 20px;
+    }
+
+    .search-btn {
+      background: linear-gradient(to right, #d83f87, #e84c3d);
+      color: white;
+      border: none;
+      padding: 1px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(216, 63, 135, 0.3);
+    }
+
+    .search-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(216, 63, 135, 0.4);
+    }
+
+    .popular-cities {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .popular-cities a {
+      color: var(--city-color);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 5px 15px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.7);
+      transition: all 0.3s;
+    }
+
+    .popular-cities a:hover {
+      background: var(--city-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .search-box {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-btn {
+        justify-content: center;
+        padding: 15px;
+      }
+    }
+
+    /* Gallery Section Styles */
+    .gallery-section {
+      padding: 100px 0;
+      background-color: white;
+    }
+
+    .gallery-filter {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      background: #f8f8f8;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      aspect-ratio: 1/1;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+
+    .gallery-overlay h3 {
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    .gallery-overlay p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .view-more {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+
+      .gallery-filter {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* ===== Pricing Section ===== */
+    .pricing-section {
+      padding: 100px 0;
+      background-color: #fef6f9;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 10px;
+      padding: 40px 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+      transition: transform 0.3s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--primary-color);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      background: var(--primary-color);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .pricing-card h3 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark-color);
+    }
+
+    .features {
+      list-style: none;
+    }
+
+    .features li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .features li:before {
+      content: "✓";
+      color: var(--primary-color);
+      position: absolute;
+      left: 0;
+    }
+
+    .btn-pricing {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-pricing:hover {
+      background: var(--secondary-color);
+    }
+
+    /* ===== Services Section ===== */
+    .services-section {
+      padding: 100px 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 10px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: #fef6f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      color: var(--primary-color);
+      font-size: 30px;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    /* ===== Footer (Same as Homepage) ===== */
+    footer {
+      background: linear-gradient(135deg, #d83f87, #e84c3d);
+      /*background-color: var(--dark-color);*/
+      color: white;
+      padding-top: 80px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-about h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-about p {
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .footer-social-links a:hover {
+      background: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    .footer-links h3,
+    .footer-contact h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+
+    .footer-contact p {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ccc;
+    }
+
+    .footer-contact i {
+      color: var(--primary-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    /* ===== Responsive Adjustments ===== */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      nav ul {
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+      }
+
+      .logo {
+        margin: 0 0 15px 0;
+      }
+
+      nav {
+        margin-left: 0;
+        width: 100%;
+      }
+
+      nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .account-menu {
+        margin-left: 0;
+        margin-top: 15px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav ul {
+        gap: 10px;
+      }
+
+      .menu-trigger {
+        padding: 6px 12px;
+      }
+
+      .dropdown-menu {
+        width: 260px;
+        right: 50%;
+        transform: translate(50%, 10px);
+      }
+
+      .account-menu:hover .dropdown-menu {
+        transform: translate(50%, 0);
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+
+    .page-transition {
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+  </style>
+  <!-- progress bar -->
+
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">WeddingPlannerPro</a>
+      <nav>
+        <ul>
+          <li><a href="home.html" class="active">Home</a></li>
+          <li><a href="#gallery" class="active">Gallery</a></li>
+          <li><a href="pricing.html" class="active">Pricing</a></li>
+          <li><a href="services.html" class="active">Services</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="contact.html" class="active">Review</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+          <!-- HTML Structure -->
+          <li class="account-menu">
+            <div class="menu-trigger">
+              <i class="fas fa-user-circle"></i>
+              <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="dropdown-menu">
+              <ul>
+                <li>
+                  <a href="my-weaddings.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                  </a>
+                </li>
+                <li>
+                  <a href="profile.html">
+                    <i class="fas fa-user-edit"></i>
+                    Edit Profile
+                  </a>
+                </li>
+                <li>
+                  <a href="my-weaddings.html">
+                    <i class="fas fa-calendar-check"></i>
+                    My Weddings
+                  </a>
+                </li>
+                <li>
+                  <a href="profile.html">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                  </a>
+                  <a href="signup.html" class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Log Out
+                  </a>
+                </li>
+          </li>
+          <li id="nav-signup-btn">
+            <a href="signup.html" class="auth-btn">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+          </li>
+        </ul>
+    </div>
+    </li>
+    </ul>
+    </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Your Dream Wedding Starts Here</h1>
+        <p>Let our professional planners create your perfect day</p>
+        <div class="hero-buttons">
+          <a href="pricing.html" class="btn-primary">View Packages</a>
+          <a href="contact.html" class="btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEARCH SECTION ===== -->
+  <section class="venue-search">
+    <div class="search-container">
+      <h2 class="search-title">Find Top Wedding Venues</h2>
+      <p class="search-subtitle">Discover premium venues across India</p>
+
+      <div class="search-box">
+        <div class="input-group">
+          <i class="fas fa-map-marker-alt"></i>
+          <select class="form-input search-select">
+            <option value="">Select City</option>
+            <option>Mumbai</option>
+            <option>Delhi</option>
+            <option>Kolkata</option>
+            <option>Uttar Pradesh</option>
+            <option>Bangalore</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-calendar-alt"></i>
+          <input type="date" class="form-input" placeholder="Event Date">
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-users"></i>
+          <input type="number" class="form-input" placeholder="Guest Count" min="1">
+        </div>
+
+        <button class="search-btn">
+          <i class="fas fa-search"></i> Search Venues
+        </button>
+      </div>
+
+      <!-- Popular Cities Quick Links -->
+      <div class="popular-cities">
+        <span>Popular:</span>
+        <a href="#mumbai" style="--city-color: #d83f87">Mumbai</a>
+        <a href="#delhi" style="--city-color: #e84c3d">Delhi</a>
+        <a href="#kolkata" style="--city-color: #2596be">Kolkata</a>
+        <a href="#up" style="--city-color: #873e23">Uttar Pradesh</a>
+        <a href="#bangalore" style="--city-color: #5d3587">Bangalore</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section 
+    -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <h2 class="section-title">Our Wedding Gallery</h2>
+      <p class="section-subtitle">Browse our curated collection of beautiful weddings we've planned</p>
+
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ceremony">Ceremonies</button>
+        <button class="filter-btn" data-filter="reception">Receptions</button>
+        <button class="filter-btn" data-filter="details">Details</button>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Ceremony Images -->
+        <div class="gallery-item" data-category="ceremony">
+          <img
+            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Outdoor ceremony">
+          <div class="gallery-overlay">
+            <h3>Garden Ceremony</h3>
+            <p>Elegant outdoor wedding with floral arch</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="ceremony">
+          <img
+            src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Beach ceremony">
+          <div class="gallery-overlay">
+            <h3>Befront Wedding</h3>
+            <p>Sunset beach ceremony with ocean views</p>
+          </div>
+        </div>
+
+        <!-- Reception Images -->
+        <div class="gallery-item" data-category="reception">
+          <img
+            src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Ballroom reception">
+          <div class="gallery-overlay">
+            <h3>Grand Ballroom</h3>
+            <p>Luxury reception with crystal chandeliers</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="reception">
+          <img
+            src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Tent reception">
+          <div class="gallery-overlay">
+            <h3>Elegant Tent</h3>
+            <p>Clear-top tent with fairy lights</p>
+          </div>
+        </div>
+
+        <!-- Detail Images -->
+        <div class="gallery-item" data-category="details">
+          <img
+            src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Wedding cake">
+          <div class="gallery-overlay">
+            <h3>Custom Cake</h3>
+            <p>Four-tiered floral wedding cake</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="details">
+          <img
+            src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Table setting">
+          <div class="gallery-overlay">
+            <h3>Table Design</h3>
+            <p>Modern tablescape with gold accents</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="ceremony">
+          <img
+            src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Church ceremony">
+          <div class="gallery-overlay">
+            <h3>Traditional Church</h3>
+            <p>Classic ceremony with stained glass</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="reception">
+          <img
+            src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            alt="Outdoor reception">
+          <div class="gallery-overlay">
+            <h3>Garden Party</h3>
+            <p>Al fresco dining under the stars</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-more">
+        <a href="#" class="btn-primary">View Full Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing-section">
+    <div class="container">
+      <h2 class="section-title">Our Packages</h2>
+      <p class="section-subtitle">
+        Find the perfect package for your special day
+      </p>
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3>Essential</h3>
+          <div class="price">$2,499</div>
+          <ul class="features">
+            <li>Venue selection assistance</li>
+            <li>Basic decor planning</li>
+            <li>Day-of coordination</li>
+            <li>Vendor recommendations</li>
+          </ul>
+          <button class="btn-pricing">Select Plan</button>
+        </div>
+        <div class="pricing-card featured">
+          <div class="featured-badge">Most Popular</div>
+          <h3>Premium</h3>
+          <div class="price">$4,999</div>
+          <ul class="features">
+            <li>Full planning service</li>
+            <li>Custom decor design</li>
+            <li>Vendor management</li>
+            <li>Photography coordination</li>
+            <li>RSVP tracking</li>
+          </ul>
+          <button class="btn-pricing">Select Plan</button>
+        </div>
+        <div class="pricing-card">
+          <h3>Luxury</h3>
+          <div class="price">$8,999+</div>
+          <ul class="features">
+            <li>Dedicated planner</li>
+            <li>Custom design package</li>
+            <li>International venue options</li>
+            <li>VIP guest services</li>
+            <li>Honeymoon planning</li>
+          </ul>
+          <button class="btn-pricing">Contact Us</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-subtitle">Everything you need for your perfect day</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-ring"></i>
+          </div>
+          <h3>Ceremony Planning</h3>
+          <p>
+            Beautiful ceremony setups tailored to your vision and cultural
+            traditions.
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-glass-cheers"></i>
+          </div>
+          <h3>Reception Design</h3>
+          <p>
+            Memorable receptions with perfect flow, lighting, and
+            entertainment.
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-camera"></i>
+          </div>
+          <h3>Vendor Coordination</h3>
+          <p>We handle all vendor communications and contracts.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3>Catering Management</h3>
+          <p>Menu planning, tastings, and dietary requirement handling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        weddingDate: document.getElementById("weddingDate").value,
+        service: document.getElementById("service").value,
+      };
+
+      try {
+        const res = await fetch("http://localhost:5000/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        alert(result.message || "Form submitted!");
+      } catch (err) {
+        console.error("Error submitting form:", err);
+        alert("There was an error. Please try again later.");
+      }
+    });
+  </script>
+
+  <script src="home.js"></script>
+  <script src="footer.js"></script>
+</body>
+
+</html>

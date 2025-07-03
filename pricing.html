@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planner Pro | Pricing & Packages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== Global Styles ===== */
+        :root {
+            --primary-color: #d83f87;
+            --secondary-color: #a52a5e;
+            --accent-color: #ff7aa8;
+            --dark-color: #2c2c2c;
+            --light-color: #fff9f9;
+            --text-color: #333;
+            --text-light: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d83f87;
+            text-decoration: none;
+            pointer-events: none;
+        }
+
+        nav ul {
+            position: absolute;
+            top: 20%;
+            right: 30px;
+            display: flex;
+            list-style: none;
+            align-items: center;
+            text-decoration: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            position: relative;
+        }
+
+        nav ul li a.active:after,
+        nav ul li a:hover:after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        nav ul li a.active,
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Updated Account Dropdown Styles */
+        .account-menu {
+            position: relative;
+            margin-left: 8px;
+        }
+
+        .menu-trigger {
+            display: flex;
+            position: relative;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 15px;
+            background-color: #f8f8f8;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .menu-trigger:hover {
+            background-color: #e9e9e9;
+        }
+
+        .menu-trigger i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 18px;
+            width: 20px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 180px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .account-menu:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu ul {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown-menu li {
+            margin-left: 15%;
+            padding: 0px 12px;
+            transition: all 0.2s;
+        }
+
+        .fa-calendar-check {
+            margin-left: 15px;
+        }
+
+        .fa-cog {
+            margin-left: -12px;
+        }
+
+        .logout-btn {
+            margin-left: -11px;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: #f9f9f9;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            gap: 12px;
+        }
+
+        .dropdown-menu i {
+            width: 20px;
+            color: var(--primary-color);
+        }
+
+        .logout-btn {
+            padding-top: 12px;
+            color: #e74c3c;
+        }
+
+        .logout-btn i {
+            color: #e74c3c !important;
+        }
+
+        /* ===== Pricing Hero Section ===== */
+        .pricing-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("https://images.unsplash.com/photo-1511285560929-80b456fea0bc") center/cover no-repeat;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .pricing-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .pricing-hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ===== Pricing Packages Section ===== */
+        .pricing-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--primary-color);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .btn-pricing {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-pricing:hover {
+            background: var(--secondary-color);
+        }
+
+        /* ===== Service Details Section ===== */
+        .service-details {
+            padding: 80px 0;
+            background-color: #fef6f9;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .service-item.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .service-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .service-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-content ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .service-content li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .service-content li:before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* ===== FAQ Section ===== */
+        .faq-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-answer.show {
+            max-height: 200px;
+        }
+
+        /* ===== CTA Section ===== */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e") center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-cta {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-cta-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-cta-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .btn-cta-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-cta-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ===== Footer (Same as Homepage) ===== */
+        footer {
+            background: linear-gradient(135deg, #d83f87, #e84c3d);
+            /*background-color: var(--dark-color);*/
+            color: white;
+            padding-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .footer-social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .footer-contact i {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* ===== Responsive Adjustments ===== */
+        @media (max-width: 992px) {
+            .service-item {
+                flex-direction: column;
+            }
+
+            .service-item.reverse {
+                flex-direction: column;
+            }
+
+            .service-img,
+            .service-content {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pricing-hero h1 {
+                font-size: 2rem;
+            }
+
+            .pricing-hero p {
+                font-size: 1rem;
+            }
+        }
+
+        .page-transition {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">WeddingPlannerPro</a>
+            <nav>
+                <ul>
+                    <li><a href="home.html" class="active">Home</a></li>
+                    <li><a href="#gallery" class="active">Gallery</a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="contact.html" class="active">Review</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <!-- HTML Structure -->
+                    <li class="account-menu">
+                        <div class="menu-trigger">
+                            <i class="fas fa-user-circle"></i>
+                            <div class="hamburger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu">
+                            <ul>
+                                <li>
+                                    <a href="my-weaddings.html">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-user-edit"></i>
+                                        Edit Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="my-weaddings.html">
+                                        <i class="fas fa-calendar-check"></i>
+                                        My Weddings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-cog"></i>
+                                        Settings
+                                    </a>
+                                    <a href="signup.html" class="logout-btn" onclick="logout()">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Pricing Hero Section -->
+    <section class="pricing-hero">
+        <div class="container">
+            <div class="pricing-hero-content">
+                <h1>Wedding Planning Packages</h1>
+                <p>Choose the perfect package for your dream wedding</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Packages Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Our Wedding Packages</h2>
+            <p class="section-subtitle">Select the package that fits your vision</p>
+
+            <div class="pricing-cards">
+                <!-- Essential Package -->
+                <div class="pricing-card">
+                    <h3>Essential</h3>
+                    <div class="price">$2,499 <span>/ starting price</span></div>
+                    <ul class="features">
+                        <li>Venue selection assistance</li>
+                        <li>Basic decor planning</li>
+                        <li>Day-of coordination</li>
+                        <li>Vendor recommendations</li>
+                        <li>Timeline creation</li>
+                        <li>Up to 3 consultations</li>
+                    </ul>
+                    <button class="btn-pricing">Get Started</button>
+                </div>
+
+                <!-- Premium Package (Most Popular) -->
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">$4,999 <span>/ starting price</span></div>
+                    <ul class="features">
+                        <li>Full planning service</li>
+                        <li>Custom decor design</li>
+                        <li>Vendor management</li>
+                        <li>Photography coordination</li>
+                        <li>RSVP tracking</li>
+                        <li>Unlimited consultations</li>
+                        <li>Wedding rehearsal</li>
+                    </ul>
+                    <button class="btn-pricing">Select Plan</button>
+                </div>
+
+                <!-- Luxury Package -->
+                <div class="pricing-card">
+                    <h3>Luxury</h3>
+                    <div class="price">$8,999+ <span>/ custom quote</span></div>
+                    <ul class="features">
+                        <li>Dedicated planner</li>
+                        <li>Custom design package</li>
+                        <li>International venue options</li>
+                        <li>VIP guest services</li>
+                        <li>Honeymoon planning</li>
+                        <li>Personal concierge</li>
+                        <li>Exclusive vendor access</li>
+                    </ul>
+                    <button class="btn-pricing">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Details Section -->
+    <section class="service-details">
+        <div class="container">
+            <h2 class="section-title">What's Included</h2>
+            <p class="section-subtitle">Detailed breakdown of our services</p>
+
+            <!-- Venue Selection -->
+            <div class="service-item">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc" alt="Venue selection">
+                </div>
+                <div class="service-content">
+                    <h3>Venue Selection</h3>
+                    <p>We help you find the perfect venue that matches your style, budget, and guest count. Our team
+                        visits locations with you and negotiates contracts.</p>
+                    <ul>
+                        <li>Personalized venue recommendations</li>
+                        <li>Site visits & comparisons</li>
+                        <li>Contract review & negotiation</li>
+                        <li>Logistics planning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Decor & Design -->
+            <div class="service-item reverse">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8" alt="Wedding decor">
+                </div>
+                <div class="service-content">
+                    <h3>Decor & Design</h3>
+                    <p>From floral arrangements to lighting design, we create a cohesive aesthetic that brings your
+                        vision to life.</p>
+                    <ul>
+                        <li>Custom mood boards</li>
+                        <li>Floral design consultation</li>
+                        <li>Rental coordination</li>
+                        <li>Setup & breakdown</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Vendor Coordination -->
+            <div class="service-item">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e" alt="Vendor meeting">
+                </div>
+                <div class="service-content">
+                    <h3>Vendor Coordination</h3>
+                    <p>We connect you with our trusted network of photographers, caterers, musicians, and more.</p>
+                    <ul>
+                        <li>Vetted vendor recommendations</li>
+                        <li>Contract review</li>
+                        <li>Payment scheduling</li>
+                        <li>Day-of coordination</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know</p>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What's the difference between the packages?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The Essential package is perfect for couples who need guidance but want to handle most planning
+                        themselves. The Premium package includes full planning services, while the Luxury package offers
+                        white-glove service with exclusive vendors and international options.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can we customize a package?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We offer add-on services for any package, including extra planning hours, additional
+                        consultations, or specific vendor coordination.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>When should we book your services?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We recommend booking 12-18 months before your wedding date, especially for our Premium and Luxury
+                        packages. Essential packages can be booked 6-9 months in advance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Plan Your Dream Wedding?</h2>
+                <p>Schedule a free consultation with one of our wedding planners to discuss your vision and find the
+                    perfect package.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-cta btn-cta-primary">Book a Consultation</a>
+                    <a href="tel:+15551234567" class="btn-cta btn-cta-secondary">Call Us Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="footer.js"></script>
+</body>
+
+</html>
